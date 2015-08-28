@@ -5,4 +5,9 @@ class Blog extends CI_Controller {
     {
         echo 'Hello World!';
     }
+
+    public function comments()
+    {
+        echo 'Look at this!';
+    }
 }
