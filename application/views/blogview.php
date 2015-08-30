@@ -14,6 +14,9 @@
 
     <?php endforeach;?>
 </ul>
-
+<script>
+    console.log("<?=$title?>");
+    console.log(<?php echo json_encode($heading); ?>);
+</script>
 </body>
 </html>
