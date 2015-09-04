@@ -8,10 +8,10 @@ class Form extends CI_Controller {
 
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[5]|max_length[12]');
-        $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[8]');
-        $this->form_validation->set_rules('passconf', 'Password Confirmation', 'trim|required|matches[password]');
-        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+        $this->form_validation->set_rules('username', 'Username', 'callback_username_check');
+        $this->form_validation->set_rules('password', 'Password', 'required');
+        $this->form_validation->set_rules('passconf', 'Password Confirmation', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required|is_unique[users.email]');
 
         if ($this->form_validation->run() == FALSE)
         {
@@ -22,4 +22,18 @@ class Form extends CI_Controller {
             $this->load->view('formsuccess');
         }
     }
+
+    public function username_check($str)
+    {
+        if ($str == 'test')
+        {
+            $this->form_validation->set_message('username_check', 'The {field} field can not be the word "test"');
+            return FALSE;
+        }
+        else
+        {
+            return TRUE;
+        }
+    }
+
 }
